@@ -4,7 +4,7 @@ set softtabstop=2 " tabbing
 set shiftwidth=2  " tabbing
 set tabstop=2     " tabbing
 set expandtab     " tabbing
-set smartindent   " indent smartly 
+set smartindent   " indent "smartly" 
 set showmatch     " show matching brackets
 set scrolloff=10  " keep at least 5 lines above/below
 set autochdir     " switch to the working file directory
@@ -46,11 +46,11 @@ endif
 " *****************************
 
 " helps traverse long wrapped lines (won't skip to next line, but rather the line below
-nnoremap k gk
-nnoremap j gj
+noremap k gk
+noremap j gj
 
-"map <F3> to the ls command - must have CR, Enter, or Return on the end to run command
-nnoremap <F3> :ls<CR>
+"map <F3> turn on spell check - must have CR, Enter, or Return on the end to run command
+nnoremap <F3> :set spell<CR>:echo "z= to check words!"<CR>
 
 "find current word in document (<C-R><C-W> gets current word)
 nnoremap <C-f> /<C-R><C-W><CR>
@@ -58,6 +58,9 @@ nnoremap <C-f> /<C-R><C-W><CR>
 "reload the VIMRC using F5
 nnoremap <F5> :so $MYVIMRC<CR>
 inoremap <F5> <Esc>:w<CR>:so $MYVIMRC<CR>a
+
+" Edit vimrc 
+nnoremap <silent> <F6> :sp ~/.vimrc<CR>
 
 "wrap visual text highlight in comments 
 vnoremap c <Esc>`>a*/<Esc>`<i/*<Esc>
@@ -78,5 +81,26 @@ nnoremap <silent> zk O<Esc>
 nnoremap <space> za
 vnoremap <space> zf
 
-" A pointless mapping for the leader key - leader is backslash unless "let mapleader = " is called
-nnoremap <leader>] :w<CR> 
+" Fold like a champion
+nnoremap <silent> ff v%zf " create fold to corresponding bracket, brace, paren
+nnoremap <silent> df zd   " delete the current fold
+nnoremap <silent> daf zE  " delete all folds in a doc
+nnoremap <silent> fo zR   " open all folds
+nnoremap <silent> fc zM   " collapse all folds 
+
+" A mapping for the leader key - leader is backslash unless "let mapleader = " is called
+" use to switch back and forth from split windows
+nnoremap <leader>] <C-W><C-W><CR>
+
+" remap to use Control and navigation keys to switch between windows
+nnoremap <silent> <C-j> :wincmd j<CR>
+nnoremap <silent> <C-k> :wincmd k<CR>
+nnoremap <silent> <C-l> :wincmd l<CR>
+nnoremap <silent> <C-h> :wincmd h<CR>
+
+" Expand or contract window with shift + or -
+nnoremap + <C-w>+
+nnoremap _ <C-w>-
+
+" Retab a file (get rid of all tabs)
+nnoremap <leader>t :retab<CR>
