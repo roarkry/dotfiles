@@ -20,18 +20,29 @@ syntax on         " turn on syntax highlighting
 
 colorscheme slate " use a dark color scheme
 
-"Handles backup files (~), which currently I care for, but I'm leaving it in for future use...
-"if has("vms")
-"  set nobackup		" do not keep a backup file, use versions instead
-"else
-"  TODO: Create these directories - VIM won't create them for you
-"  set backup		" keep a backup file
-"  set backupdir=~/.vim/backup " keep all backup files here
-"  set directory=~/.vim/tmp " keep all temporary files here
-"endif
+" -------------------------
+" Plug Ins
+" -------------------------
+" TaskList
+" NerdTree
+" MiniBufExplorer
+" -------------------------
 
-" remove tool bar from GUI
+"Handles backup files (~), which currently I care for, but I'm leaving it in for future use...
+" if has("vms")
+"   set nobackup		" do not keep a backup file, use versions instead
+" else
+"   "TODO: Create these directories - VIM won't create them for you
+"   set backup		" keep a backup file
+"   set backupdir=~/.vim/backup " keep all backup files here
+"   set directory=~/.vim/tmp " keep all temporary files here
+" endif
+
+" remove tool bar from GUI (T) and remove scroll bars (lrb)
 if has("gui_running")
+   set guioptions-=l
+   set guioptions-=r
+   set guioptions-=b
    set guioptions-=T
 endif
 
@@ -44,6 +55,9 @@ endif
 " *****************************
 " KEY MAPPINGS
 " *****************************
+
+" A very popular and common keymap to protect from typos
+nnoremap ; : 
 
 " helps traverse long wrapped lines (won't skip to next line, but rather the line below
 noremap k gk
@@ -74,8 +88,8 @@ inoremap <C-s> <Esc>:w<CR>   " goes to normal mode
 inoremap jj <Esc>
 
 " Create Blank Newlines and stay in Normal mode - silent means no message will be output to bottom
-nnoremap <silent> zj o<Esc>
-nnoremap <silent> zk O<Esc>
+nnoremap <silent> <leader>j o<Esc>
+nnoremap <silent> <leader>k O<Esc>
 
 " Space will toggle folds!
 nnoremap <space> za
@@ -84,9 +98,11 @@ vnoremap <space> zf
 " Fold like a champion
 nnoremap <silent> ff v%zf " create fold to corresponding bracket, brace, paren
 nnoremap <silent> df zd   " delete the current fold
-nnoremap <silent> daf zE  " delete all folds in a doc
+nnoremap <silent> daf zE  " delete all folds in a dock
 nnoremap <silent> fo zR   " open all folds
 nnoremap <silent> fc zM   " collapse all folds 
+au BufWinLeave * mkview   " save view state when closing
+au BufWinEnter * silent loadview " load view state when opening
 
 " A mapping for the leader key - leader is backslash unless "let mapleader = " is called
 " use to switch back and forth from split windows
@@ -103,4 +119,4 @@ nnoremap + <C-w>+
 nnoremap _ <C-w>-
 
 " Retab a file (get rid of all tabs)
-nnoremap <leader>t :retab<CR>
+" nnoremap <leader>t :retab<CR> " Currently conflicts with TaskList
