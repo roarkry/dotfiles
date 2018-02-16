@@ -9,7 +9,13 @@
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
-set $mod Mod4
+# Ryan Notes:
+# Mod = Alt
+# Dependencies: feh, compton, fonts-font-awesome, roboto
+# Tools: lxappearance, xprop
+# Todo: ROFI, i3blocks
+
+set $mod Mod1
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -17,7 +23,7 @@ set $mod Mod4
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:DejaVu Sans Mono 8
+font pango:Roboto 10
 
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -94,7 +100,7 @@ bindsym $mod+a focus parent
 
 set $ws1 "1 - "
 set $ws2 "2 - "
-set $ws3 "3 - "
+set $ws3 "3 - "
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -159,12 +165,20 @@ bar {
         status_command i3status
 }
 
+bindsym $mod+i exec i3lock -c 000000
+
 # Find class using xprop (wm_class -> last value) 
 assign [class="Gnome-terminal"] $ws1
 assign [class="Firefox"] $ws2
+assign [class="Code"] $ws3
 
 exec feh --bg-scale ~/Pictures/background.jpg
-exec_always compton -f
+# -f will fade windows, but in a VM that is suboptimal
+exec_always compton 
 exec firefox
+exec i3-sensible-terminal
+exec i3-sensible-terminal
+exec code
 focus_follows_mouse no
+
 
