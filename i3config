@@ -11,7 +11,7 @@
 
 # Ryan Notes:
 # Mod = Alt
-# Dependencies: feh, compton, fonts-font-awesome, roboto
+# Dependencies: feh, compton, fonts-font-awesome, fonts-roboto
 # Tools: lxappearance, xprop
 # Todo: ROFI, i3blocks
 
@@ -162,19 +162,25 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3status
+        position top
+        status_command i3blocks
 }
 
 bindsym $mod+i exec i3lock -c 000000
+
+# Pulse Audio controls
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
 
 # Find class using xprop (wm_class -> last value) 
 assign [class="Gnome-terminal"] $ws1
 assign [class="Firefox"] $ws2
 assign [class="Code"] $ws3
 
-exec feh --bg-scale ~/Pictures/background.jpg
+exec feh --bg-scale ~/Pictures/background.png
 # -f will fade windows, but in a VM that is suboptimal
-exec_always compton 
+exec_always compton -f
 exec firefox
 exec i3-sensible-terminal
 exec i3-sensible-terminal

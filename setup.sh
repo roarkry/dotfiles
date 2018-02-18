@@ -2,3 +2,4 @@
 
 ln i3config ~/.config/i3/config
 ln .vimrc ~/.vimrc
+ln .i3blocks.conf ~/.i3blocks.conf
