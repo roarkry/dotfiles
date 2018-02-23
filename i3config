@@ -164,6 +164,7 @@ bindsym $mod+r mode "resize"
 bar {
         position top
         status_command i3blocks
+        tray_output primary
 }
 
 bindsym $mod+i exec i3lock -c 000000
