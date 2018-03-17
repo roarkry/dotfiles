@@ -11,7 +11,7 @@
 
 # Ryan Notes:
 # Mod = Alt
-# Dependencies: feh, compton, fonts-font-awesome, fonts-roboto, i3blocks, scrot, imagemagick, xautolock
+# Dependencies: feh, compton, fonts-font-awesome, fonts-roboto, i3blocks, scrot, imagemagick, xautolock, xss-lock
 # Tools: lxappearance, xprop
 # Todo: ROFI, i3blocks customization
 
@@ -171,6 +171,7 @@ bar {
 #bindsym $mod+i exec i3lock -c 000000
 bindsym $mod+i exec ~/.blurLock.sh 
 exec xautolock -time 10 -locker ~/.blurLock.sh
+exec xss-lock -- "$HOME/.blurLock.sh"
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
